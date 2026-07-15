@@ -1,0 +1,12 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+
+# Test binary
+*.test
+
+# Go workspace file
+go.work
+go.work.sum
