@@ -1,5 +1,6 @@
-// Package font provides functions for adding new fonts to the tool
-// and retrieving the established fonts.
+// Package font provides functions for adding new fonts to the tool and retrieving the established fonts.
+//
+// Each font registered using AddFont must include the character '?' or a blank space as a fallback.
 package font
 
 import "errors"
