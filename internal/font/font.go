@@ -8,6 +8,7 @@ import "errors"
 type Font struct {
 	Name       string
 	Characters map[rune][]string
+	Height     int
 }
 
 var AvailableFonts = make(map[string]Font)
