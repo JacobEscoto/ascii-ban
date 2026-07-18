@@ -9,8 +9,15 @@ import (
 
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
+	"github.com/JacobEscoto/ascii-ban/internal/storage"
 	"github.com/spf13/cobra"
 )
+
+type Options struct {
+	outputPath string
+}
+
+var options = &Options{}
 
 var rootCmd = &cobra.Command{
 	Use:   "ascii-ban <text>",
@@ -36,6 +43,15 @@ Example:
 		if err != nil {
 			return err
 		}
+		if options.outputPath != "" {
+			err := storage.WriteBanner(options.outputPath, result)
+			if err != nil {
+				return err
+			}
+			fmt.Printf("Banner successfully saved to %s\n", options.outputPath)
+			return nil
+		}
+
 		fmt.Println(result)
 		return nil
 	},
@@ -43,4 +59,8 @@ Example:
 
 func Execute() error {
 	return rootCmd.Execute()
+}
+
+func init() {
+	rootCmd.Flags().StringVarP(&options.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
 }
