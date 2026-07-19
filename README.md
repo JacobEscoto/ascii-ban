@@ -8,6 +8,7 @@
 
 - Support for special characters (with accents and diacritics), icons such as the copyright symbol or the eszett character.
 - Option to save the generated ASCII banner to a text file using the `--output` or `-o` flags.
+- Display of a live clock that updates on the terminal.
 
 ## Installation
 
@@ -42,7 +43,7 @@ go build -o ascii-ban .
 
 4. Run the compiled binary to verify that everything works
 
-**Linux / macOs**:
+**Linux / macOS**:
 ```bash
 ./ascii-ban "hello world"
 ```
@@ -88,6 +89,11 @@ ascii-ban "Hello World!"
 ### Save to a file
 ```bash
 ascii-ban "Hello World!" --output gen_banner.txt
+```
+
+### Clock display
+```bash
+ascii-ban clock
 ```
 
 ## License
