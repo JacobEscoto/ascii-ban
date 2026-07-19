@@ -1,0 +1,47 @@
+package cmd
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/JacobEscoto/ascii-ban/internal/font"
+	"github.com/JacobEscoto/ascii-ban/internal/generator"
+	"github.com/spf13/cobra"
+)
+
+var clockCmd = &cobra.Command{
+	Use:   "clock",
+	Short: "Displays the time in real using ASCII numbers",
+	Long:  `Displays a live clock directly in your terminal using ASCII art.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		font, fontErr := font.GetFont("standard")
+		if fontErr != nil {
+			return fontErr
+		}
+
+		ticker := time.NewTicker(1 * time.Second)
+		defer ticker.Stop()
+
+		fmt.Print("\033[H\033[2J")
+
+		for range ticker.C {
+			hour := getLocalTime()
+			hourResult, err := generator.Render(hour, font)
+			if err != nil {
+				return fmt.Errorf("an error occurred while rendering the clock: %w", err)
+			}
+			fmt.Print("\033[H")
+			fmt.Print(hourResult)
+		}
+		return nil
+	},
+}
+
+func getLocalTime() string {
+	now := time.Now()
+	return fmt.Sprintf("%02d:%02d", now.Hour(), now.Minute())
+}
+
+func init() {
+	rootCmd.AddCommand(clockCmd)
+}
