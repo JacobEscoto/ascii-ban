@@ -9,12 +9,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type ClockOptions struct {
+	font string
+}
+
+var clockOptions = ClockOptions{}
+
 var clockCmd = &cobra.Command{
 	Use:   "clock",
 	Short: "Displays the time in real using ASCII numbers",
 	Long:  `Displays a live clock directly in your terminal using ASCII art.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		font, fontErr := font.GetFont("standard")
+		font, fontErr := font.GetFont(clockOptions.font)
 		if fontErr != nil {
 			return fontErr
 		}
@@ -43,5 +49,6 @@ func getLocalTime() string {
 }
 
 func init() {
+	clockCmd.Flags().StringVarP(&clockOptions.font, "font", "f", "standard", "Available fonts: standard | slant")
 	rootCmd.AddCommand(clockCmd)
 }

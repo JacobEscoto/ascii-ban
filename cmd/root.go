@@ -15,6 +15,7 @@ import (
 
 type Options struct {
 	outputPath string
+	font       string
 }
 
 var options = &Options{}
@@ -35,7 +36,7 @@ Example:
 	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		usrText := strings.Join(args, " ")
-		stdFont, fontErr := font.GetFont("standard")
+		stdFont, fontErr := font.GetFont(options.font)
 		if fontErr != nil {
 			return fontErr
 		}
@@ -63,4 +64,5 @@ func Execute() error {
 
 func init() {
 	rootCmd.Flags().StringVarP(&options.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
+	rootCmd.Flags().StringVarP(&options.font, "font", "f", "standard", "Choose a font to display the ASCII banner. standard | slant")
 }
