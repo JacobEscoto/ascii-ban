@@ -13,12 +13,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type Options struct {
+type generalOptions struct {
 	outputPath string
 	font       string
 }
 
-var options = &Options{}
+var generalOpts = &generalOptions{}
 
 var rootCmd = &cobra.Command{
 	Use:   "ascii-ban <text>",
@@ -36,7 +36,7 @@ Example:
 	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		usrText := strings.Join(args, " ")
-		stdFont, fontErr := font.GetFont(options.font)
+		stdFont, fontErr := font.GetFont(generalOpts.font)
 		if fontErr != nil {
 			return fontErr
 		}
@@ -44,12 +44,12 @@ Example:
 		if err != nil {
 			return err
 		}
-		if options.outputPath != "" {
-			err := storage.WriteBanner(options.outputPath, result)
+		if generalOpts.outputPath != "" {
+			err := storage.WriteBanner(generalOpts.outputPath, result)
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Banner successfully saved to %s\n", options.outputPath)
+			fmt.Printf("Banner successfully saved to %s\n", generalOpts.outputPath)
 			return nil
 		}
 
@@ -63,6 +63,6 @@ func Execute() error {
 }
 
 func init() {
-	rootCmd.Flags().StringVarP(&options.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
-	rootCmd.Flags().StringVarP(&options.font, "font", "f", "standard", "Choose a font to display the ASCII banner. standard | slant")
+	rootCmd.Flags().StringVarP(&generalOpts.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
+	rootCmd.PersistentFlags().StringVarP(&generalOpts.font, "font", "f", "standard", "Specify the font to use")
 }
