@@ -1164,7 +1164,8 @@ var standardFont = Font{
 			`           `,
 		},
 	},
-	Height: 6,
+	UppercaseOnly: false,
+	Height:        6,
 }
 
 func init() {

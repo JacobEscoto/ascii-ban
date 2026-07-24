@@ -14,17 +14,21 @@ import (
 
 // Render takes the text and renders it by iterating and building the final result.
 // If a character does not exist, it receives an alternative character, usually '?' or a space.
-func Render(userText string, chosenFont font.Font) (string, error) {
+func Render(text string, chosenFont font.Font) (string, error) {
 	var builder strings.Builder
 
-	if userText == "" {
+	if text == "" {
 		return "", errors.New("the text to be rendered is empty")
+	}
+
+	if chosenFont.UppercaseOnly {
+		text = strings.ToUpper(text)
 	}
 
 	fontCharacters := chosenFont.Characters
 
 	for idx := range chosenFont.Height {
-		for _, character := range userText {
+		for _, character := range text {
 			asciiChar, exists := fontCharacters[character]
 			if !exists {
 				if asciiChar, exists = fontCharacters['?']; !exists {

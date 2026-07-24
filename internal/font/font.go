@@ -10,9 +10,10 @@ import (
 
 // Font represents a struct that includes a name and a characters map that returns an array of strings.
 type Font struct {
-	Name       string
-	Characters map[rune][]string
-	Height     int
+	Name          string
+	Characters    map[rune][]string
+	UppercaseOnly bool
+	Height        int
 }
 
 var AvailableFonts = make(map[string]Font)
