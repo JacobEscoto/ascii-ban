@@ -96,6 +96,15 @@ ascii-ban "Hello World!" --output gen_banner.txt
 ascii-ban clock
 ```
 
+### Choosing a font
+```bash
+# Uses the 'standard' font by default if not specified
+ascii-ban "Banner" --font slant
+
+# Live clock using a custom font
+ascii-ban clock --font slant
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
