@@ -2,10 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
+	"github.com/JacobEscoto/ascii-ban/internal/terminal"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +24,10 @@ var clockCmd = &cobra.Command{
 		ticker := time.NewTicker(1 * time.Second)
 		defer ticker.Stop()
 
-		fmt.Print("\033[H\033[2J")
+		fmt.Printf("\033[H\033[2J")
+
+		defer fmt.Printf("\033[?25h")
+		fd := int(os.Stdout.Fd())
 
 		for range ticker.C {
 			hour := getLocalTime()
@@ -30,8 +35,11 @@ var clockCmd = &cobra.Command{
 			if err != nil {
 				return fmt.Errorf("an error occurred while rendering the clock: %w", err)
 			}
-			fmt.Print("\033[H")
-			fmt.Print(hourResult)
+
+			centeredClock := terminal.CenterText(hourResult, fd)
+
+			fmt.Printf("\033[H")
+			fmt.Printf("%s", centeredClock)
 		}
 		return nil
 	},
