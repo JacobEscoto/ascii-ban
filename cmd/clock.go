@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/JacobEscoto/ascii-ban/internal/align"
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
-	"github.com/JacobEscoto/ascii-ban/internal/terminal"
 	"github.com/spf13/cobra"
 )
 
@@ -36,7 +36,7 @@ var clockCmd = &cobra.Command{
 				return fmt.Errorf("an error occurred while rendering the clock: %w", err)
 			}
 
-			centeredClock := terminal.CenterText(hourResult, fd)
+			centeredClock := align.FullScreenCenter(hourResult, fd)
 
 			fmt.Printf("\033[H")
 			fmt.Printf("%s", centeredClock)

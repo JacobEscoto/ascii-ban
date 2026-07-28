@@ -5,8 +5,10 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
+	"github.com/JacobEscoto/ascii-ban/internal/align"
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
 	"github.com/JacobEscoto/ascii-ban/internal/storage"
@@ -16,6 +18,7 @@ import (
 type generalOptions struct {
 	outputPath string
 	font       string
+	align      string
 }
 
 var generalOpts = &generalOptions{}
@@ -44,6 +47,22 @@ Example:
 		if err != nil {
 			return err
 		}
+
+		fd := int(os.Stdout.Fd())
+
+		switch strings.ToLower(generalOpts.align) {
+		case "center":
+			result = align.Center(result, fd)
+
+		case "right":
+			result = align.Right(result, fd)
+
+		case "left":
+			result = align.Left(result, fd)
+		default:
+			return fmt.Errorf("invalid alignment '%s': options available are left, center, right", generalOpts.align)
+		}
+
 		if generalOpts.outputPath != "" {
 			err := storage.WriteBanner(generalOpts.outputPath, result)
 			if err != nil {
@@ -65,4 +84,5 @@ func Execute() error {
 func init() {
 	rootCmd.Flags().StringVarP(&generalOpts.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
 	rootCmd.PersistentFlags().StringVarP(&generalOpts.font, "font", "f", "standard", "Specify the font to use")
+	rootCmd.Flags().StringVar(&generalOpts.align, "align", "left", "Options available: left | right | center")
 }
