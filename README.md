@@ -1,6 +1,7 @@
 # ASCII Banner Generator
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![Release version](https://img.shields.io/github/v/release/JacobEscoto/ascii-ban)
 
 **ascii-ban** (ASCII Banner Generator) is a command-line tool that, as its name suggests, generates ASCII art in the terminal with a provided text.
 
@@ -8,6 +9,7 @@
 
 - Support for special characters (with accents and diacritics), icons such as the copyright symbol or the eszett character.
 - Option to save the generated ASCII banner to a text file using the `--output` or `-o` flags.
+- Text alignment options (`left`, `center`, `right`) to position banners across the terminal.
 - Display of a live clock that updates on the terminal.
 
 ## Installation
@@ -84,6 +86,10 @@ go install .
 ### Basic Usage
 ```bash
 ascii-ban "Hello World!"
+```
+
+```bash
+ascii-ban "Hello World!" --align center
 ```
 
 ### Save to a file

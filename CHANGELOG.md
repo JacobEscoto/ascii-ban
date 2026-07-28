@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0] - 2026-07-28
+
+### Added
+- **New Font**: Added support for `ansi-shadow` font style.
+- **Text Alignment**: Added `--align` flag supporting `left`, `center`, and `right` positioning powered by `lipgloss`.
+- **Automatic Formatting**: Implemented `UppercaseOnly` font capability for automatic text conversion on supported fonts like `ansi-shadow`.
+
+---
+
 ## [0.1.0] - 2026-07-23
 
 ### Added
@@ -10,28 +19,5 @@
 - Help documentation (`--help`)
 - Basic error handling
 
-### Features
-- **ASCII Art Banner Generator**: Convert text to large ASCII art banners
-- **Live ASCII Clock**: Display time in ASCII format in the terminal
-- **Font Selection**: Choose between `standard` and `slant` fonts
-
-### Supported Fonts
-- `standard` (default)
-- `slant`
-
-### Known Limitations
-- Only 2 fonts available in this release
-- Clock updates at fixed intervals
-
-### Quick Start
-```bash
-ascii-ban --help
-ascii-ban "banner go" --font slant
-ascii-ban clock
-```
-
-### Requirements
-- Linux/macOS/Windows support
-
-### Feedback
-Report issues at: [Github Issues](https://github.com/JacobEscoto/ascii-ban/issues)
+[0.2.0]: https://github.com/JacobEscoto/ascii-ban/releases/tag/v0.2.0
+[0.1.0]: https://github.com/JacobEscoto/ascii-ban/releases/tag/v0.1.0
