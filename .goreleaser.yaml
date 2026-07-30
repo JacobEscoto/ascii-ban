@@ -72,4 +72,4 @@ release:
   draft: false
   prerelease: auto
   make_latest: true
-  name_template: '{{.ProjectName}} {{.Version}}'
+  name_template: '{{.Version}}'
