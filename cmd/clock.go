@@ -5,16 +5,19 @@ import (
 	"os"
 	"time"
 
-	"github.com/JacobEscoto/ascii-ban/internal/align"
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
+	"github.com/JacobEscoto/ascii-ban/internal/style"
 	"github.com/spf13/cobra"
 )
 
 var clockCmd = &cobra.Command{
 	Use:   "clock",
 	Short: "Displays the time in real using ASCII numbers",
-	Long:  `Displays a live clock directly in your terminal using ASCII art.`,
+	Long: `Displays a live clock directly in your terminal using ASCII art.
+
+Example:
+  ascii-ban clock -f ansi-shadow -c "#4e3bf7"`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		font, fontErr := font.GetFont(generalOpts.font)
 		if fontErr != nil {
@@ -31,15 +34,16 @@ var clockCmd = &cobra.Command{
 
 		for range ticker.C {
 			hour := getLocalTime()
-			hourResult, err := generator.Render(hour, font)
+			asciiHour, err := generator.Render(hour, font)
 			if err != nil {
 				return fmt.Errorf("an error occurred while rendering the clock: %w", err)
 			}
 
-			centeredClock := align.FullScreenCenter(hourResult, fd)
+			stylishClock := style.FullscreenCenter(asciiHour, fd)
+			stylishClock = style.Color(stylishClock, generalOpts.color)
 
 			fmt.Printf("\033[H")
-			fmt.Printf("%s", centeredClock)
+			fmt.Printf("%s", stylishClock)
 		}
 		return nil
 	},
