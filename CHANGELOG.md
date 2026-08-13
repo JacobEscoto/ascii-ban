@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.1] - 2026-08-13
+## [0.3.1] - 2026-08-12
 
 ## Fixed
 - **ANSI Export Fix**: Prevented ANSI color codes from being written to output text files when using the `--color` flag alongside export options.
