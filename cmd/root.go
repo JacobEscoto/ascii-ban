@@ -8,10 +8,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/JacobEscoto/ascii-ban/internal/align"
 	"github.com/JacobEscoto/ascii-ban/internal/font"
 	"github.com/JacobEscoto/ascii-ban/internal/generator"
 	"github.com/JacobEscoto/ascii-ban/internal/storage"
+	"github.com/JacobEscoto/ascii-ban/internal/style"
 	"github.com/spf13/cobra"
 )
 
@@ -52,13 +52,16 @@ Example:
 
 		switch strings.ToLower(generalOpts.align) {
 		case "center":
-			result = align.Center(result, fd)
+			result = style.Center(result, fd)
 
 		case "right":
-			result = align.Right(result, fd)
+			result = style.Right(result, fd)
 
 		case "left":
-			result = align.Left(result, fd)
+			result = style.Left(result, fd)
+
+		case "fullscreen":
+			result = style.FullscreenCenter(result, fd)
 		default:
 			return fmt.Errorf("invalid alignment '%s': options available are left, center, right", generalOpts.align)
 		}
@@ -84,5 +87,5 @@ func Execute() error {
 func init() {
 	rootCmd.Flags().StringVarP(&generalOpts.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
 	rootCmd.PersistentFlags().StringVarP(&generalOpts.font, "font", "f", "standard", "Specify the font to use")
-	rootCmd.Flags().StringVar(&generalOpts.align, "align", "left", "Options available: left | right | center")
+	rootCmd.Flags().StringVar(&generalOpts.align, "align", "left", "Options available: left | right | center | fullscreen")
 }

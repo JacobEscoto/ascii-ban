@@ -1,5 +1,5 @@
-// Package align provides functions to pad ASCII strings to the left, right, or center.
-package align
+// Package style provides functions to pad ASCII string to the left, right, or center. It also provides functions to colorize ASCII text.
+package style
 
 import (
 	"strings"
@@ -9,18 +9,20 @@ import (
 )
 
 // renderAligned is a private helper that handles the terminal sizing and lipgloss styling.
-func renderAligned(asciiArt string, fd int, alignment lipgloss.Position, fullScreen bool) string {
+func renderAligned(asciiArt string, fd int, alignment lipgloss.Position, fullscreen bool) string {
 	width, height, err := term.GetSize(fd)
 	if err != nil {
-		return asciiArt // return original text if it cannot get the terminal size.
+		return asciiArt // return original text if can't get the terminal size.
 	}
 
 	style := lipgloss.NewStyle().
 		Width(width).
 		Align(alignment)
 
-	if fullScreen {
-		style = style.Height(height).AlignVertical(lipgloss.Center)
+	if fullscreen {
+		style = style.
+			Height(height).
+			AlignVertical(lipgloss.Center)
 	}
 
 	cleanArt := strings.TrimRight(asciiArt, "\n")
@@ -43,7 +45,7 @@ func Right(asciiArt string, fd int) string {
 	return renderAligned(asciiArt, fd, lipgloss.Right, false)
 }
 
-// FullScreenCenter is specifically designed for the live clock.
-func FullScreenCenter(asciiArt string, fd int) string {
+// FullscreenCenter is specifically designed for the live clock.
+func FullscreenCenter(asciiArt string, fd int) string {
 	return renderAligned(asciiArt, fd, lipgloss.Center, true)
 }
