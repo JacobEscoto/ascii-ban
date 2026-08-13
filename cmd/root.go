@@ -66,10 +66,8 @@ Examples:
 		case "fullscreen":
 			renderedASCII = style.FullscreenCenter(renderedASCII, fd)
 		default:
-			return fmt.Errorf("invalid alignment '%s': options available are left, center, right", generalOpts.align)
+			return fmt.Errorf("invalid alignment '%s': options available are left, center, right, fullscreen", generalOpts.align)
 		}
-
-		renderedASCII = style.Color(renderedASCII, generalOpts.color)
 
 		if generalOpts.outputPath != "" {
 			err := storage.WriteBanner(generalOpts.outputPath, renderedASCII)
@@ -78,6 +76,10 @@ Examples:
 			}
 			fmt.Printf("Banner successfully saved to %s\n", generalOpts.outputPath)
 			return nil
+		}
+
+		if generalOpts.color != "" {
+			renderedASCII = style.Color(renderedASCII, generalOpts.color)
 		}
 
 		fmt.Println(renderedASCII)
@@ -93,5 +95,5 @@ func init() {
 	rootCmd.Flags().StringVarP(&generalOpts.outputPath, "output", "o", "", "Generate an ASCII art banner in a text file")
 	rootCmd.PersistentFlags().StringVarP(&generalOpts.font, "font", "f", "standard", "Specify the font to use")
 	rootCmd.Flags().StringVar(&generalOpts.align, "align", "left", "Options available: left | right | center | fullscreen")
-	rootCmd.PersistentFlags().StringVarP(&generalOpts.color, "color", "c", "white", "Specify the color to print the rendered text")
+	rootCmd.PersistentFlags().StringVarP(&generalOpts.color, "color", "c", "", "Specify the color to print the rendered text")
 }
