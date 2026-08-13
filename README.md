@@ -10,6 +10,7 @@
 - Support for special characters (with accents and diacritics), icons such as the copyright symbol or the eszett character.
 - Option to save the generated ASCII banner to a text file using the `--output` or `-o` flags.
 - Text alignment options (`left`, `center`, `right`) to position banners across the terminal.
+- Text coloring support for ASCII art using HEX codes and ANSI values.
 - Display of a live clock that updates on the terminal.
 
 ## Installation
@@ -109,6 +110,14 @@ ascii-ban "Banner" --font slant
 
 # Live clock using a custom font
 ascii-ban clock --font slant
+```
+
+### Choosing a color
+```bash
+ascii-ban "Python" -c "#3776AB"
+
+# Live clock using a custom color
+ascii-ban clock -c "#FFF023"
 ```
 
 ## License

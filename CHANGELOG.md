@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0] - 2026-08-13
+
+### Added
+- **Text Coloring**: Added `--color` flag to colorize ASCII art outputs using HEX codes, or ANSI values powered by `lipgloss`.
+- **Flexible Hex Input**: Automatic detection and prefixing of `#` for HEX color codes (e.g., accepts both `FFF023` and `#FFF023`).
+
+### Refactored
+- **Internal Packages**: Consolidated `align` and color utilities into a single `style` package for cleaner layout and maintenance.
+
 ## [0.2.0] - 2026-07-28
 
 ### Added
@@ -19,5 +28,6 @@
 - Help documentation (`--help`)
 - Basic error handling
 
+[0.3.0]: https://github.com/JacobEscoto/ascii-ban/releases/tag/v0.3.0
 [0.2.0]: https://github.com/JacobEscoto/ascii-ban/releases/tag/v0.2.0
 [0.1.0]: https://github.com/JacobEscoto/ascii-ban/releases/tag/v0.1.0
