@@ -1,6 +1,13 @@
 # Changelog
 
-## [0.3.0] - 2026-08-13
+## [0.3.1] - 2026-08-13
+
+## Fixed
+- **ANSI Export Fix**: Prevented ANSI color codes from being written to output text files when using the `--color` flag alongside export options.
+
+---
+
+## [0.3.0] - 2026-08-12
 
 ### Added
 - **Text Coloring**: Added `--color` flag to colorize ASCII art outputs using HEX codes, or ANSI values powered by `lipgloss`.
@@ -8,6 +15,8 @@
 
 ### Refactored
 - **Internal Packages**: Consolidated `align` and color utilities into a single `style` package for cleaner layout and maintenance.
+
+---
 
 ## [0.2.0] - 2026-07-28
 
